@@ -1,0 +1,74 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="myDBModelStoreContainer" CdmEntityContainer="myDBEntities">
+    <EntitySetMapping Name="attendance">
+      <EntityTypeMapping TypeName="myDBModel.attendance">
+        <MappingFragment StoreEntitySet="attendance">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="成员" ColumnName="成员" />
+          <ScalarProperty Name="日期" ColumnName="日期" />
+          <ScalarProperty Name="出勤情况" ColumnName="出勤情况" />
+          <ScalarProperty Name="备注" ColumnName="备注" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="evaluation">
+      <EntityTypeMapping TypeName="myDBModel.evaluation">
+        <MappingFragment StoreEntitySet="evaluation">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="被评价者" ColumnName="被评价者" />
+          <ScalarProperty Name="内容" ColumnName="内容" />
+          <ScalarProperty Name="日期" ColumnName="日期" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="member">
+      <EntityTypeMapping TypeName="myDBModel.member">
+        <MappingFragment StoreEntitySet="member">
+          <ScalarProperty Name="mId" ColumnName="mId" />
+          <ScalarProperty Name="姓名" ColumnName="姓名" />
+          <ScalarProperty Name="用户名" ColumnName="用户名" />
+          <ScalarProperty Name="密码" ColumnName="密码" />
+          <ScalarProperty Name="性别" ColumnName="性别" />
+          <ScalarProperty Name="学院" ColumnName="学院" />
+          <ScalarProperty Name="班级" ColumnName="班级" />
+          <ScalarProperty Name="职务" ColumnName="职务" />
+          <ScalarProperty Name="电话" ColumnName="电话" />
+          <ScalarProperty Name="邮箱" ColumnName="邮箱" />
+          <ScalarProperty Name="等级" ColumnName="等级" />
+          <ScalarProperty Name="爱好" ColumnName="爱好" />
+          <ScalarProperty Name="座右铭" ColumnName="座右铭" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="skill">
+      <EntityTypeMapping TypeName="myDBModel.skill">
+        <MappingFragment StoreEntitySet="skill">
+          <ScalarProperty Name="skId" ColumnName="skId" />
+          <ScalarProperty Name="元素名称" ColumnName="元素名称" />
+          <ScalarProperty Name="元素简介" ColumnName="元素简介" />
+          <ScalarProperty Name="视频" ColumnName="视频" />
+          <ScalarProperty Name="元素掌握人员" ColumnName="元素掌握人员" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="stage">
+      <EntityTypeMapping TypeName="myDBModel.stage">
+        <MappingFragment StoreEntitySet="stage">
+          <ScalarProperty Name="stId" ColumnName="stId" />
+          <ScalarProperty Name="stName" ColumnName="stName" />
+          <ScalarProperty Name="表演日期" ColumnName="表演日期" />
+          <ScalarProperty Name="表演人员" ColumnName="表演人员" />
+          <ScalarProperty Name="公众号链接" ColumnName="公众号链接" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Table">
+      <EntityTypeMapping TypeName="myDBModel.Table">
+        <MappingFragment StoreEntitySet="Table">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

@@ -1,0 +1,389 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="myDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="attendance">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="成员" Type="int" />
+          <Property Name="日期" Type="date" />
+          <Property Name="出勤情况" Type="nvarchar" MaxLength="20" />
+          <Property Name="备注" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="evaluation">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="被评价者" Type="int" Nullable="false" />
+          <Property Name="内容" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="日期" Type="date" Nullable="false" />
+        </EntityType>
+        <EntityType Name="member">
+          <Key>
+            <PropertyRef Name="mId" />
+          </Key>
+          <Property Name="mId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="姓名" Type="nvarchar" MaxLength="50" />
+          <Property Name="用户名" Type="nvarchar" MaxLength="50" />
+          <Property Name="密码" Type="nvarchar" MaxLength="50" />
+          <Property Name="性别" Type="nchar" MaxLength="10" />
+          <Property Name="学院" Type="nvarchar" MaxLength="50" />
+          <Property Name="班级" Type="nvarchar" MaxLength="50" />
+          <Property Name="职务" Type="nvarchar" MaxLength="50" />
+          <Property Name="电话" Type="nvarchar" MaxLength="50" />
+          <Property Name="邮箱" Type="nvarchar" MaxLength="50" />
+          <Property Name="等级" Type="int" />
+          <Property Name="爱好" Type="nvarchar" MaxLength="50" />
+          <Property Name="座右铭" Type="nvarchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="skill">
+          <Key>
+            <PropertyRef Name="skId" />
+          </Key>
+          <Property Name="skId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="元素名称" Type="nvarchar" MaxLength="50" />
+          <Property Name="元素简介" Type="nvarchar" MaxLength="100" />
+          <Property Name="视频" Type="nvarchar" MaxLength="50" />
+          <Property Name="元素掌握人员" Type="int" />
+        </EntityType>
+        <EntityType Name="stage">
+          <Key>
+            <PropertyRef Name="stId" />
+          </Key>
+          <Property Name="stId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="stName" Type="nvarchar" MaxLength="50" />
+          <Property Name="表演日期" Type="date" />
+          <Property Name="表演人员" Type="int" />
+          <Property Name="公众号链接" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="Table">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_attendance_ToTable">
+          <End Role="member" Type="Self.member" Multiplicity="0..1" />
+          <End Role="attendance" Type="Self.attendance" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="member">
+              <PropertyRef Name="mId" />
+            </Principal>
+            <Dependent Role="attendance">
+              <PropertyRef Name="成员" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_evaluation_ToTable">
+          <End Role="member" Type="Self.member" Multiplicity="1" />
+          <End Role="evaluation" Type="Self.evaluation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="member">
+              <PropertyRef Name="mId" />
+            </Principal>
+            <Dependent Role="evaluation">
+              <PropertyRef Name="被评价者" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_skill_ToTable">
+          <End Role="member" Type="Self.member" Multiplicity="0..1" />
+          <End Role="skill" Type="Self.skill" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="member">
+              <PropertyRef Name="mId" />
+            </Principal>
+            <Dependent Role="skill">
+              <PropertyRef Name="元素掌握人员" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_stage_ToTable">
+          <End Role="member" Type="Self.member" Multiplicity="0..1" />
+          <End Role="stage" Type="Self.stage" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="member">
+              <PropertyRef Name="mId" />
+            </Principal>
+            <Dependent Role="stage">
+              <PropertyRef Name="表演人员" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="myDBModelStoreContainer">
+          <EntitySet Name="attendance" EntityType="Self.attendance" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="evaluation" EntityType="Self.evaluation" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="member" EntityType="Self.member" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="skill" EntityType="Self.skill" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="stage" EntityType="Self.stage" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Table" EntityType="Self.Table" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_attendance_ToTable" Association="Self.FK_attendance_ToTable">
+            <End Role="member" EntitySet="member" />
+            <End Role="attendance" EntitySet="attendance" />
+          </AssociationSet>
+          <AssociationSet Name="FK_evaluation_ToTable" Association="Self.FK_evaluation_ToTable">
+            <End Role="member" EntitySet="member" />
+            <End Role="evaluation" EntitySet="evaluation" />
+          </AssociationSet>
+          <AssociationSet Name="FK_skill_ToTable" Association="Self.FK_skill_ToTable">
+            <End Role="member" EntitySet="member" />
+            <End Role="skill" EntitySet="skill" />
+          </AssociationSet>
+          <AssociationSet Name="FK_stage_ToTable" Association="Self.FK_stage_ToTable">
+            <End Role="member" EntitySet="member" />
+            <End Role="stage" EntitySet="stage" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="myDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="attendance">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="成员" Type="Int32" />
+          <Property Name="日期" Type="DateTime" Precision="0" />
+          <Property Name="出勤情况" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="备注" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="member" Relationship="Self.FK_attendance_ToTable" FromRole="attendance" ToRole="member" />
+        </EntityType>
+        <EntityType Name="evaluation">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="被评价者" Type="Int32" Nullable="false" />
+          <Property Name="内容" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="日期" Type="DateTime" Nullable="false" Precision="0" />
+          <NavigationProperty Name="member" Relationship="Self.FK_evaluation_ToTable" FromRole="evaluation" ToRole="member" />
+        </EntityType>
+        <EntityType Name="member">
+          <Key>
+            <PropertyRef Name="mId" />
+          </Key>
+          <Property Name="mId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="姓名" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="用户名" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="密码" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="性别" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="学院" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="班级" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="职务" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="电话" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="邮箱" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="等级" Type="Int32" />
+          <Property Name="爱好" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="座右铭" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="attendance" Relationship="Self.FK_attendance_ToTable" FromRole="member" ToRole="attendance" />
+          <NavigationProperty Name="evaluation" Relationship="Self.FK_evaluation_ToTable" FromRole="member" ToRole="evaluation" />
+          <NavigationProperty Name="skill" Relationship="Self.FK_skill_ToTable" FromRole="member" ToRole="skill" />
+          <NavigationProperty Name="stage" Relationship="Self.FK_stage_ToTable" FromRole="member" ToRole="stage" />
+        </EntityType>
+        <EntityType Name="skill">
+          <Key>
+            <PropertyRef Name="skId" />
+          </Key>
+          <Property Name="skId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="元素名称" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="元素简介" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="视频" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="元素掌握人员" Type="Int32" />
+          <NavigationProperty Name="member" Relationship="Self.FK_skill_ToTable" FromRole="skill" ToRole="member" />
+        </EntityType>
+        <EntityType Name="stage">
+          <Key>
+            <PropertyRef Name="stId" />
+          </Key>
+          <Property Name="stId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="stName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="表演日期" Type="DateTime" Precision="0" />
+          <Property Name="表演人员" Type="Int32" />
+          <Property Name="公众号链接" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="member" Relationship="Self.FK_stage_ToTable" FromRole="stage" ToRole="member" />
+        </EntityType>
+        <EntityType Name="Table">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_attendance_ToTable">
+          <End Role="member" Type="Self.member" Multiplicity="0..1" />
+          <End Role="attendance" Type="Self.attendance" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="member">
+              <PropertyRef Name="mId" />
+            </Principal>
+            <Dependent Role="attendance">
+              <PropertyRef Name="成员" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_evaluation_ToTable">
+          <End Role="member" Type="Self.member" Multiplicity="1" />
+          <End Role="evaluation" Type="Self.evaluation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="member">
+              <PropertyRef Name="mId" />
+            </Principal>
+            <Dependent Role="evaluation">
+              <PropertyRef Name="被评价者" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_skill_ToTable">
+          <End Role="member" Type="Self.member" Multiplicity="0..1" />
+          <End Role="skill" Type="Self.skill" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="member">
+              <PropertyRef Name="mId" />
+            </Principal>
+            <Dependent Role="skill">
+              <PropertyRef Name="元素掌握人员" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_stage_ToTable">
+          <End Role="member" Type="Self.member" Multiplicity="0..1" />
+          <End Role="stage" Type="Self.stage" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="member">
+              <PropertyRef Name="mId" />
+            </Principal>
+            <Dependent Role="stage">
+              <PropertyRef Name="表演人员" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="myDBEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="attendance" EntityType="Self.attendance" />
+          <EntitySet Name="evaluation" EntityType="Self.evaluation" />
+          <EntitySet Name="member" EntityType="Self.member" />
+          <EntitySet Name="skill" EntityType="Self.skill" />
+          <EntitySet Name="stage" EntityType="Self.stage" />
+          <EntitySet Name="Table" EntityType="Self.Table" />
+          <AssociationSet Name="FK_attendance_ToTable" Association="Self.FK_attendance_ToTable">
+            <End Role="member" EntitySet="member" />
+            <End Role="attendance" EntitySet="attendance" />
+          </AssociationSet>
+          <AssociationSet Name="FK_evaluation_ToTable" Association="Self.FK_evaluation_ToTable">
+            <End Role="member" EntitySet="member" />
+            <End Role="evaluation" EntitySet="evaluation" />
+          </AssociationSet>
+          <AssociationSet Name="FK_skill_ToTable" Association="Self.FK_skill_ToTable">
+            <End Role="member" EntitySet="member" />
+            <End Role="skill" EntitySet="skill" />
+          </AssociationSet>
+          <AssociationSet Name="FK_stage_ToTable" Association="Self.FK_stage_ToTable">
+            <End Role="member" EntitySet="member" />
+            <End Role="stage" EntitySet="stage" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="myDBModelStoreContainer" CdmEntityContainer="myDBEntities">
+          <EntitySetMapping Name="attendance">
+            <EntityTypeMapping TypeName="myDBModel.attendance">
+              <MappingFragment StoreEntitySet="attendance">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="成员" ColumnName="成员" />
+                <ScalarProperty Name="日期" ColumnName="日期" />
+                <ScalarProperty Name="出勤情况" ColumnName="出勤情况" />
+                <ScalarProperty Name="备注" ColumnName="备注" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="evaluation">
+            <EntityTypeMapping TypeName="myDBModel.evaluation">
+              <MappingFragment StoreEntitySet="evaluation">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="被评价者" ColumnName="被评价者" />
+                <ScalarProperty Name="内容" ColumnName="内容" />
+                <ScalarProperty Name="日期" ColumnName="日期" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="member">
+            <EntityTypeMapping TypeName="myDBModel.member">
+              <MappingFragment StoreEntitySet="member">
+                <ScalarProperty Name="mId" ColumnName="mId" />
+                <ScalarProperty Name="姓名" ColumnName="姓名" />
+                <ScalarProperty Name="用户名" ColumnName="用户名" />
+                <ScalarProperty Name="密码" ColumnName="密码" />
+                <ScalarProperty Name="性别" ColumnName="性别" />
+                <ScalarProperty Name="学院" ColumnName="学院" />
+                <ScalarProperty Name="班级" ColumnName="班级" />
+                <ScalarProperty Name="职务" ColumnName="职务" />
+                <ScalarProperty Name="电话" ColumnName="电话" />
+                <ScalarProperty Name="邮箱" ColumnName="邮箱" />
+                <ScalarProperty Name="等级" ColumnName="等级" />
+                <ScalarProperty Name="爱好" ColumnName="爱好" />
+                <ScalarProperty Name="座右铭" ColumnName="座右铭" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="skill">
+            <EntityTypeMapping TypeName="myDBModel.skill">
+              <MappingFragment StoreEntitySet="skill">
+                <ScalarProperty Name="skId" ColumnName="skId" />
+                <ScalarProperty Name="元素名称" ColumnName="元素名称" />
+                <ScalarProperty Name="元素简介" ColumnName="元素简介" />
+                <ScalarProperty Name="视频" ColumnName="视频" />
+                <ScalarProperty Name="元素掌握人员" ColumnName="元素掌握人员" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="stage">
+            <EntityTypeMapping TypeName="myDBModel.stage">
+              <MappingFragment StoreEntitySet="stage">
+                <ScalarProperty Name="stId" ColumnName="stId" />
+                <ScalarProperty Name="stName" ColumnName="stName" />
+                <ScalarProperty Name="表演日期" ColumnName="表演日期" />
+                <ScalarProperty Name="表演人员" ColumnName="表演人员" />
+                <ScalarProperty Name="公众号链接" ColumnName="公众号链接" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Table">
+            <EntityTypeMapping TypeName="myDBModel.Table">
+              <MappingFragment StoreEntitySet="Table">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="无" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

@@ -1,0 +1,95 @@
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="ModifyUser.aspx.cs" Inherits="POPPING_PARADISE成员管理系统.user.ModifyUser" %>
+<asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="server">
+    <style type="text/css">
+        .auto-style1 {
+        width: 87px;
+        text-align: right;
+        }
+        .auto-style2 {
+            width: 221px;
+        }
+    </style>
+</asp:Content>
+<asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
+    <header id="gtco-header" class="gtco-cover gtco-cover-sm" role="banner" style="background-image: url(../images/img_4.jpg)">
+		
+		<div class="gtco-container">
+			<div class="row">
+				<div class="col-md-12 col-md-offset-0 text-left">
+					<div class="row row-mt-15em">
+
+						<div class="col-md-7 mt-text animate-box" data-animate-effect="fadeInUp">
+							<span class="intro-text-small">Don't be shy</span>
+							<h1>Get In Touch</h1>	
+						</div>
+						
+					</div>
+					
+				</div>
+			</div>
+		</div>
+	</header>
+
+	<%-- 修改用户信息 --%>
+    <div>
+        <p style="text-align:center;">
+            <br />
+			修改用户信息：<asp:TextBox ID="tbQueyUser" runat="server"></asp:TextBox>
+            <asp:Button ID="Button1" runat="server" Text="查" BackColor="#A55129" BorderColor="#DEBA84" BorderWidth="3px" Font-Bold="True" ForeColor="White" Width="50px" OnClick="Button1_Click" />
+        </p>
+        <table style="border:2px;width:100%;margin-left:20px;">
+            <tr>
+                <td class="auto-style1">姓名：</td>
+                <td class="auto-style2">
+                    <asp:TextBox ID="tbName" runat="server"></asp:TextBox>
+                </td>
+                <td rowspan="6" style="vertical-align:top;padding-bottom:50px;">
+                    <asp:GridView ID="GridView1" runat="server" BackColor="#DEBA84" BorderColor="#DEBA84" BorderStyle="None" BorderWidth="1px" CellPadding="3" CellSpacing="2" Height="200px">
+                        <FooterStyle BackColor="#F7DFB5" ForeColor="#8C4510" />
+                        <HeaderStyle BackColor="#A55129" Font-Bold="True" ForeColor="White" />
+                        <PagerStyle ForeColor="#8C4510" HorizontalAlign="Center" />
+                        <RowStyle BackColor="#FFF7E7" ForeColor="#8C4510" />
+                        <SelectedRowStyle BackColor="#738A9C" Font-Bold="True" ForeColor="White" />
+                        <SortedAscendingCellStyle BackColor="#FFF1D4" />
+                        <SortedAscendingHeaderStyle BackColor="#B95C30" />
+                        <SortedDescendingCellStyle BackColor="#F1E5CE" />
+                        <SortedDescendingHeaderStyle BackColor="#93451F" />
+                    </asp:GridView>
+				</td>
+            </tr>
+            <tr>
+                <td class="auto-style1">用户：</td>
+				<td class="auto-style2">
+                    <asp:TextBox ID="tbUser" runat="server"></asp:TextBox>
+				</td>				
+            </tr>
+            <tr>
+                <td class="auto-style1">初始密码：</td>
+                <td class="auto-style2">
+                    <asp:TextBox ID="tbKey" runat="server"></asp:TextBox>
+                </td>
+            </tr>
+            <tr>
+                <td class="auto-style1">性别：</td>
+                <td class="auto-style2">
+                    <asp:TextBox ID="tbSex" runat="server"></asp:TextBox>
+                </td>
+            </tr>
+            <tr>
+                <td class="auto-style1">职务：</td>
+                <td class="auto-style2">
+                    <asp:TextBox ID="tbPost" runat="server"></asp:TextBox>
+                </td>
+            </tr>
+            <tr>
+                <td class="auto-style1">
+                    <asp:Label ID="lbHide_ID" runat="server" Visible="False"></asp:Label>
+                </td>
+                <td class="auto-style2">
+                    <asp:Button ID="Button2" runat="server" Text="修改" OnClick="Button2_Click" BackColor="#A55129" BorderColor="#DEBA84" BorderWidth="3px" Font-Bold="True" ForeColor="White" Width="88px" />
+                    <asp:Button ID="Button3" runat="server" Text="删除" OnClick="Button3_Click" BackColor="#A55129" BorderColor="#DEBA84" BorderWidth="3px" Font-Bold="True" ForeColor="White" Width="88px" />
+                </td>
+            </tr>
+        </table>
+    </div>
+</asp:Content>
